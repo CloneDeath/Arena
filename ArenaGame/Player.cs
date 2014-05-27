@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Lidgren.Network;
 
 namespace Arena.Game
 {
@@ -9,8 +10,20 @@ namespace Arena.Game
 	{
 		internal int PlayerID = -1;
 
-		public int Health = 100;
-		public int MaxHealth = 100;
+		int _health;
+		public int Health
+		{
+			get
+			{
+				return _health;
+			}
+			set
+			{
+				_health = (value < 0) ? 0 : value;
+			}
+		}
+
+		public int MaxHealth = 10;
 		public string Name = "Unknown Player";
 		public bool Ready = false;
 		public PlayerClass Class = PlayerClass.Knight;
@@ -23,7 +36,9 @@ namespace Arena.Game
 
 		public void SendUpdate()
 		{
-			new Network.PlayerUpdateMessage(this).Send();
+			if (PlayerID != -1) {
+				new Network.PlayerUpdateMessage(this).Send(NetDeliveryMethod.ReliableOrdered);
+			}
 		}
 	}
 }

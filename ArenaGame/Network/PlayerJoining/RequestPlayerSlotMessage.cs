@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Lidgren.Messages;
+using Lidgren.Network;
 
 namespace Arena.Game.Network.PlayerJoining
 {
@@ -10,11 +11,11 @@ namespace Arena.Game.Network.PlayerJoining
 	{
 		protected override void ExecuteMessage()
 		{
-			new PlayerSlotAssignmentMessage(BattleArena.Instance.Players.Count).Reply();
-
 			foreach (Player p in BattleArena.Instance.Players) {
-				new PlayerUpdateMessage(p).Reply();
+				new PlayerUpdateMessage(p).Reply(this, NetDeliveryMethod.ReliableOrdered);
 			}
+
+			new PlayerSlotAssignmentMessage(BattleArena.Instance.Players.Count).Reply(this, NetDeliveryMethod.ReliableOrdered);
 		}
 	}
 }

@@ -32,8 +32,8 @@ namespace Arena.GameStates
 				btnReady.Enabled = false;
 				gbClasses.Enabled = false;
 				tbPlayerName.Enabled = false;
-				btnStart.Enabled = false;
 
+				btnStart.Enabled = false;
 			} else {
 				btnReady.Enabled = true;
 				btnReady.Text = Arena.Self.Ready ? "Unready" : "Ready";
@@ -47,6 +47,8 @@ namespace Arena.GameStates
 
 				if (Arena.Host == Arena.Self) {
 					btnStart.Enabled = true;
+				} else {
+					btnStart.Enabled = false;
 				}
 			}
 

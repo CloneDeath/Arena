@@ -7,17 +7,17 @@ namespace Lidgren.Messages.TypeSerializer
 {
 	class StringSerializer : ISerializer
 	{
-		public Type Target
+		public override Type Target
 		{
 			get { return typeof(String); }
 		}
 
-		public void Write(Network.NetOutgoingMessage nom, object Value)
+		public override void Write(Network.NetOutgoingMessage nom, object Value)
 		{
 			nom.Write((String)Value);
 		}
 
-		public object Read(Network.NetIncomingMessage nim)
+		public override object Read(Network.NetIncomingMessage nim)
 		{
 			return nim.ReadString();
 		}

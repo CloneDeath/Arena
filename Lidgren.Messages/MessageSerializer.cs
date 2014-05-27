@@ -27,6 +27,7 @@ namespace Lidgren.Messages
 			AddSerializer(new UInt32Serializer());
 			AddSerializer(new UInt64Serializer());
 			AddSerializer(new IPEndPointSerializer());
+			AddSerializer(new EnumSerializer());
 		}
 
 		public static void AddSerializer(ISerializer serializer){
@@ -90,7 +91,7 @@ namespace Lidgren.Messages
 			}
 
 			foreach (ISerializer s in Serializers.Values) {
-				if (s.Target.IsAssignableFrom(type)) {
+				if (s.IsAssignableFrom(type)) {
 					return s;
 				}
 			}

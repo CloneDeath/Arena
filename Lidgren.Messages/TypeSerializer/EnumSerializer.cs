@@ -5,21 +5,26 @@ using System.Text;
 
 namespace Lidgren.Messages.TypeSerializer
 {
-	class SingleSerializer : ISerializer
+	class EnumSerializer : ISerializer
 	{
 		public override Type Target
 		{
-			get { return typeof(Single); }
+			get { return typeof(Enum); }
+		}
+
+		public override bool IsAssignableFrom(Type Value)
+		{
+			return Value.IsEnum;
 		}
 
 		public override void Write(Network.NetOutgoingMessage nom, object Value)
 		{
-			nom.Write((Single)Value);
+			nom.Write((Int32)Value);
 		}
 
 		public override object Read(Network.NetIncomingMessage nim)
 		{
-			return nim.ReadSingle();
+			return (Int32)nim.ReadInt32();
 		}
 	}
 }

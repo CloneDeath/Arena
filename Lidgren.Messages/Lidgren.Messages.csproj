@@ -72,6 +72,7 @@
     <Compile Include="TypeSerializer\BooleanSerializer.cs" />
     <Compile Include="TypeSerializer\ByteArraySerializer.cs" />
     <Compile Include="TypeSerializer\ByteSerializer.cs" />
+    <Compile Include="TypeSerializer\EnumSerializer.cs" />
     <Compile Include="TypeSerializer\DoubleSerializer.cs" />
     <Compile Include="TypeSerializer\IPEndPointSerializer.cs" />
     <Compile Include="TypeSerializer\SByteSerializer.cs" />

@@ -62,6 +62,7 @@
 			// btnStart
 			// 
 			this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnStart.Enabled = false;
 			this.btnStart.Location = new System.Drawing.Point(476, 325);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(75, 23);
@@ -113,7 +114,7 @@
 			this.tbPlayerName.Name = "tbPlayerName";
 			this.tbPlayerName.Size = new System.Drawing.Size(154, 20);
 			this.tbPlayerName.TabIndex = 6;
-			this.tbPlayerName.Text = "Stranger";
+			this.tbPlayerName.Text = "New Player";
 			this.tbPlayerName.TextChanged += new System.EventHandler(this.tbPlayerName_TextChanged);
 			// 
 			// label1

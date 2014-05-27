@@ -19,7 +19,8 @@ namespace Arena.Game.Network.PlayerJoining
 		{
 			BattleArena.Instance.Self.PlayerID = PlayerID;
 			BattleArena.Instance.Self.SendUpdate();
-			BattleArena.Instance.RefreshRequired = true;
+
+			BattleArena.Instance.UpdateRequired = true;
 		}
 	}
 }

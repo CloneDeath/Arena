@@ -7,17 +7,17 @@ namespace Lidgren.Messages.TypeSerializer
 {
 	class BooleanSerializer : ISerializer
 	{
-		public Type Target
+		public override Type Target
 		{
 			get { return typeof(Boolean); }
 		}
 
-		public void Write(Network.NetOutgoingMessage nom, object Value)
+		public override void Write(Network.NetOutgoingMessage nom, object Value)
 		{
 			nom.Write((Boolean)Value);
 		}
 
-		public object Read(Network.NetIncomingMessage nim)
+		public override object Read(Network.NetIncomingMessage nim)
 		{
 			return nim.ReadBoolean();
 		}

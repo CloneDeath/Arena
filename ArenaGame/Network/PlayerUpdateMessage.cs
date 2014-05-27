@@ -13,6 +13,9 @@ namespace Arena.Game.Network
 		PlayerClass Class;
 		string Name;
 		bool Host = false;
+		int Health;
+		int MaxHealth;
+
 
 		public PlayerUpdateMessage(Player p)
 		{
@@ -22,6 +25,9 @@ namespace Arena.Game.Network
 			this.Class = p.Class;
 			this.Name = p.Name;
 			this.Host = (p == BattleArena.Instance.Host);
+
+			this.Health = p.Health;
+			this.MaxHealth = p.MaxHealth;
 		}
 
 		public PlayerUpdateMessage() { }
@@ -34,6 +40,9 @@ namespace Arena.Game.Network
 					player.Ready = this.Ready;
 					player.Class = this.Class;
 					player.Name = this.Name;
+
+					player.Health = this.Health;
+					player.MaxHealth = this.MaxHealth;
 					
 					if (Host) {
 						BattleArena.Instance.Host = player;
@@ -51,6 +60,9 @@ namespace Arena.Game.Network
 				player.Class = this.Class;
 				player.Name = this.Name;
 
+				player.Health = this.Health;
+				player.MaxHealth = this.MaxHealth;
+
 				if (Host) {
 					BattleArena.Instance.Host = player;
 				}
@@ -58,7 +70,7 @@ namespace Arena.Game.Network
 				BattleArena.Instance.Players.Add(player);
 			}
 
-			BattleArena.Instance.RefreshRequired = true;
+			BattleArena.Instance.UpdateRequired = true;
 			this.Forward();
 		}
 	}

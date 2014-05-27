@@ -46,6 +46,8 @@
     <Compile Include="Class.Enum.cs" />
     <Compile Include="Dragon.cs" />
     <Compile Include="BattleArena.cs" />
+    <Compile Include="Network\EnemyUpdateMessage.cs" />
+    <Compile Include="Network\UpdateGameStateMessage.cs" />
     <Compile Include="Network\PlayerJoining\PlayerSlotAssignmentMessage.cs" />
     <Compile Include="Network\PlayerJoining\RequestPlayerSlotMessage.cs" />
     <Compile Include="Network\PlayerUpdateMessage.cs" />

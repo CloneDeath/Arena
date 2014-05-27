@@ -7,17 +7,17 @@ namespace Lidgren.Messages.TypeSerializer
 {
 	class UInt64Serializer : ISerializer
 	{
-		public Type Target
+		public override Type Target
 		{
 			get { return typeof(UInt64); }
 		}
 
-		public void Write(Network.NetOutgoingMessage nom, object Value)
+		public override void Write(Network.NetOutgoingMessage nom, object Value)
 		{
 			nom.Write((UInt64)Value);
 		}
 
-		public object Read(Network.NetIncomingMessage nim)
+		public override object Read(Network.NetIncomingMessage nim)
 		{
 			return (UInt64)nim.ReadUInt64();
 		}

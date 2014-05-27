@@ -12,9 +12,9 @@ namespace Lidgren.Messages
 	{
 		static HostType ConnectionType;
 		static NetPeer Connection;
-		static NetConnection LastReceivedSender;
+		NetConnection LastReceivedSender;
 
-		static bool CanReply
+		bool CanReply
 		{
 			get
 			{
@@ -42,17 +42,17 @@ namespace Lidgren.Messages
 		}
 
 		#region Reply
-		public void Reply(NetDeliveryMethod method)
+		public void Reply(Message replyto, NetDeliveryMethod method)
 		{
-			if (CanReply) {
-				this.Send(LastReceivedSender, method);
+			if (replyto.CanReply) {
+				this.Send(replyto.LastReceivedSender, method);
 			} else {
 				throw new Exception("Can only reply in 'Execute' method of a Message."); //It's the only way we know who to reply to.
 			}
 		}
-		public void Reply()
+		public void Reply(Message replyto)
 		{
-			this.Reply(NetDeliveryMethod.ReliableUnordered);
+			this.Reply(replyto, NetDeliveryMethod.ReliableUnordered);
 		}
 		#endregion
 
@@ -114,13 +114,18 @@ namespace Lidgren.Messages
 		/// </summary>
 		protected void Forward()
 		{
+			this.Forward(NetDeliveryMethod.ReliableUnordered);
+		}
+
+		protected void Forward(NetDeliveryMethod method)
+		{
 			if (ConnectionType == HostType.Client) {
 				//Do nothing
 			} else {
 				List<NetConnection> Replyto = new List<NetConnection>(
 					Connection.Connections.Where((c) => { return c != LastReceivedSender; }
 				));
-				this.Send(Connection, Replyto, NetDeliveryMethod.ReliableUnordered);
+				this.Send(Connection, Replyto, method);
 			}
 		}
 

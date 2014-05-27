@@ -29,6 +29,10 @@ namespace Arena
 				Arena.Self.Name = "Stranger";
 				Arena.Self.Ready = false;
 
+				Arena.Enemy = new Dragon();
+				Arena.Enemy.Health = 100;
+				Arena.Enemy.MaxHealth = 100;
+
 				Arena.ListenForPlayers();
 			}
 

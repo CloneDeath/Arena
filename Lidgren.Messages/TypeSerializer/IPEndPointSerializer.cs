@@ -8,17 +8,17 @@ namespace Lidgren.Messages.TypeSerializer
 {
 	class IPEndPointSerializer : ISerializer
 	{
-		public Type Target
+		public override Type Target
 		{
 			get { return typeof(IPEndPoint);  }
 		}
 
-		public void Write(Network.NetOutgoingMessage nom, object Value)
+		public override void Write(Network.NetOutgoingMessage nom, object Value)
 		{
 			nom.Write((IPEndPoint)Value);
 		}
 
-		public object Read(Network.NetIncomingMessage nim)
+		public override object Read(Network.NetIncomingMessage nim)
 		{
 			return nim.ReadIPEndPoint();
 		}

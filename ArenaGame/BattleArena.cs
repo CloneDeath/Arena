@@ -32,22 +32,39 @@ namespace Arena.Game
 			Players.Add(Self);
 
 			timer = new Timer(1000.0 / 30); //30 fps
-			timer.AutoReset = true;
+			timer.AutoReset = false;
 			timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
 			timer.Start();
 
 			Instance = this;
 		}
 
+		Random rand = new Random();
 		void timer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			Message.Update();
 
-			if (RefreshRequired) {
+			if (Host == Self) {
+				Enemy.ActionPoints += 1.0 / 30.0;
+
+				if (Enemy.ActionPoints >= 4) {
+					Enemy.ActionPoints -= 3;
+
+					int UnluckySoul = rand.Next(Players.Count);
+					Players[UnluckySoul].Health -= 3;
+					Players[UnluckySoul].SendUpdate();
+					this.UpdateRequired = true;
+				}
+			}
+
+			if (UpdateRequired) {
+				UpdateRequired = false;
 				if (OnUpdate != null) {
 					OnUpdate();
 				}
 			}
+
+			timer.Start();
 		}
 
 		public Dragon Enemy;
@@ -56,7 +73,7 @@ namespace Arena.Game
 		public Player Self;
 		public Player Host;
 
-		internal bool RefreshRequired = false;
+		internal bool UpdateRequired = false;
 
 		public void ListenForPlayers()
 		{
@@ -64,18 +81,12 @@ namespace Arena.Game
 			config.Port = 45673;
 			config.MaximumConnections = 8;
 
+			Self.PlayerID = 0;
 			Self.Connection = new NetServer(config);
 			Self.Connection.Start();
 			Message.RegisterServer(Self.Connection);
 
 			Host = Self;
-		}
-
-		public event Action OnUpdate;
-		
-		public void BeginBattle()
-		{
-			throw new NotImplementedException();
 		}
 
 		public void JoinGame(string ipaddress, int port)
@@ -92,6 +103,16 @@ namespace Arena.Game
 			Message.RegisterClient(Self.Connection);
 
 			new Network.PlayerJoining.RequestPlayerSlotMessage().Send();
+		}
+
+		public event Action OnUpdate;
+		
+		public void BeginBattle()
+		{
+			CurrentState = GameState.Arena;
+			new Network.UpdateGameStateMessage(CurrentState).Send();
+			new Network.EnemyUpdateMessage(Enemy).Send();
+			UpdateRequired = true;
 		}
 	}
 }

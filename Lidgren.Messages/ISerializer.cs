@@ -6,13 +6,19 @@ using Lidgren.Network;
 
 namespace Lidgren.Messages
 {
-	interface ISerializer
+	abstract class ISerializer
 	{
-		Type Target
+		public abstract Type Target
 		{
 			get;
 		}
-		void Write(NetOutgoingMessage nom, object Value);
-		object Read(NetIncomingMessage nim);
+
+		public virtual bool IsAssignableFrom(Type Value)
+		{
+			return Target.IsAssignableFrom(Value);
+		}
+
+		public abstract void Write(NetOutgoingMessage nom, object Value);
+		public abstract object Read(NetIncomingMessage nim);
 	}
 }
