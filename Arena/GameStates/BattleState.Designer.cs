@@ -35,6 +35,15 @@
 			this.lbPlayerName = new System.Windows.Forms.Label();
 			this.pbPlayerHealth = new System.Windows.Forms.ProgressBar();
 			this.lbPlayers = new System.Windows.Forms.ListBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.lblActionPoints = new System.Windows.Forms.Label();
+			this.btnHeal = new System.Windows.Forms.Button();
+			this.lblAttackInfo = new System.Windows.Forms.Label();
+			this.lblHealInfo = new System.Windows.Forms.Label();
+			this.lblReviveInfo = new System.Windows.Forms.Label();
+			this.btnRevive = new System.Windows.Forms.Button();
+			this.lblFierceAttackInfo = new System.Windows.Forms.Label();
+			this.btnFierceAttack = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// pbDragonHealth
@@ -107,10 +116,103 @@
 			this.lbPlayers.Size = new System.Drawing.Size(480, 160);
 			this.lbPlayers.TabIndex = 7;
 			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(260, 338);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(72, 13);
+			this.label2.TabIndex = 8;
+			this.label2.Text = "Action Points:";
+			// 
+			// lblActionPoints
+			// 
+			this.lblActionPoints.AutoSize = true;
+			this.lblActionPoints.Location = new System.Drawing.Point(338, 338);
+			this.lblActionPoints.Name = "lblActionPoints";
+			this.lblActionPoints.Size = new System.Drawing.Size(71, 13);
+			this.lblActionPoints.TabIndex = 9;
+			this.lblActionPoints.Text = "#actionpoints";
+			// 
+			// btnHeal
+			// 
+			this.btnHeal.Location = new System.Drawing.Point(316, 366);
+			this.btnHeal.Name = "btnHeal";
+			this.btnHeal.Size = new System.Drawing.Size(93, 23);
+			this.btnHeal.TabIndex = 10;
+			this.btnHeal.Text = "Heal";
+			this.btnHeal.UseVisualStyleBackColor = true;
+			this.btnHeal.Click += new System.EventHandler(this.btnHeal_Click);
+			// 
+			// lblAttackInfo
+			// 
+			this.lblAttackInfo.AutoSize = true;
+			this.lblAttackInfo.Location = new System.Drawing.Point(121, 371);
+			this.lblAttackInfo.Name = "lblAttackInfo";
+			this.lblAttackInfo.Size = new System.Drawing.Size(115, 13);
+			this.lblAttackInfo.TabIndex = 11;
+			this.lblAttackInfo.Text = "AP Cost: 1, Damage: 1";
+			// 
+			// lblHealInfo
+			// 
+			this.lblHealInfo.AutoSize = true;
+			this.lblHealInfo.Location = new System.Drawing.Point(415, 371);
+			this.lblHealInfo.Name = "lblHealInfo";
+			this.lblHealInfo.Size = new System.Drawing.Size(111, 13);
+			this.lblHealInfo.TabIndex = 12;
+			this.lblHealInfo.Text = "AP Cost: 3, Heals 3hp";
+			// 
+			// lblReviveInfo
+			// 
+			this.lblReviveInfo.AutoSize = true;
+			this.lblReviveInfo.Location = new System.Drawing.Point(415, 400);
+			this.lblReviveInfo.Name = "lblReviveInfo";
+			this.lblReviveInfo.Size = new System.Drawing.Size(174, 13);
+			this.lblReviveInfo.TabIndex = 14;
+			this.lblReviveInfo.Text = "AP Cost: 8, Revives and Heals 3hp";
+			// 
+			// btnRevive
+			// 
+			this.btnRevive.Location = new System.Drawing.Point(316, 395);
+			this.btnRevive.Name = "btnRevive";
+			this.btnRevive.Size = new System.Drawing.Size(93, 23);
+			this.btnRevive.TabIndex = 13;
+			this.btnRevive.Text = "Revive";
+			this.btnRevive.UseVisualStyleBackColor = true;
+			this.btnRevive.Click += new System.EventHandler(this.btnRevive_Click);
+			// 
+			// lblFierceAttackInfo
+			// 
+			this.lblFierceAttackInfo.AutoSize = true;
+			this.lblFierceAttackInfo.Location = new System.Drawing.Point(121, 400);
+			this.lblFierceAttackInfo.Name = "lblFierceAttackInfo";
+			this.lblFierceAttackInfo.Size = new System.Drawing.Size(178, 13);
+			this.lblFierceAttackInfo.TabIndex = 16;
+			this.lblFierceAttackInfo.Text = "AP Cost: 5, HP Cost: 6, Damage: 10";
+			// 
+			// btnFierceAttack
+			// 
+			this.btnFierceAttack.Location = new System.Drawing.Point(22, 395);
+			this.btnFierceAttack.Name = "btnFierceAttack";
+			this.btnFierceAttack.Size = new System.Drawing.Size(93, 23);
+			this.btnFierceAttack.TabIndex = 15;
+			this.btnFierceAttack.Text = "Fierce Attack";
+			this.btnFierceAttack.UseVisualStyleBackColor = true;
+			this.btnFierceAttack.Click += new System.EventHandler(this.btnFierceAttack_Click);
+			// 
 			// BattleState
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.lblFierceAttackInfo);
+			this.Controls.Add(this.btnFierceAttack);
+			this.Controls.Add(this.lblReviveInfo);
+			this.Controls.Add(this.btnRevive);
+			this.Controls.Add(this.lblHealInfo);
+			this.Controls.Add(this.lblAttackInfo);
+			this.Controls.Add(this.btnHeal);
+			this.Controls.Add(this.lblActionPoints);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.lbPlayers);
 			this.Controls.Add(this.lbPlayerHealth);
 			this.Controls.Add(this.lbPlayerName);
@@ -120,7 +222,7 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.pbDragonHealth);
 			this.Name = "BattleState";
-			this.Size = new System.Drawing.Size(621, 405);
+			this.Size = new System.Drawing.Size(621, 461);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -136,5 +238,14 @@
 		private System.Windows.Forms.Label lbPlayerName;
 		private System.Windows.Forms.ProgressBar pbPlayerHealth;
 		private System.Windows.Forms.ListBox lbPlayers;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label lblActionPoints;
+		private System.Windows.Forms.Button btnHeal;
+		private System.Windows.Forms.Label lblAttackInfo;
+		private System.Windows.Forms.Label lblHealInfo;
+		private System.Windows.Forms.Label lblReviveInfo;
+		private System.Windows.Forms.Button btnRevive;
+		private System.Windows.Forms.Label lblFierceAttackInfo;
+		private System.Windows.Forms.Button btnFierceAttack;
 	}
 }

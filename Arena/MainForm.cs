@@ -25,6 +25,7 @@ namespace Arena
 			if (hs.ShowDialog() == DialogResult.OK) {
 				Arena = new BattleArena();
 				Arena.OnUpdate += Refresh;
+				Arena.OnShowMessage += new Action<string>(Arena_OnShowMessage);
 
 				Arena.Self.Name = "Stranger";
 				Arena.Self.Ready = false;
@@ -37,6 +38,16 @@ namespace Arena
 			}
 
 			Refresh();
+		}
+
+		void Arena_OnShowMessage(string msg)
+		{
+			if (this.InvokeRequired) {
+				this.Invoke((MethodInvoker)delegate() {
+					this.Arena_OnShowMessage(msg);
+				});
+			}
+			MessageBox.Show(msg);
 		}
 
 		private void connectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,7 +68,7 @@ namespace Arena
 
 		public override void Refresh()
 		{
-			if (this.InvokeRequired) {
+			if (this.InvokeRequired && !this.IsDisposed) {
 				this.Invoke((MethodInvoker)delegate() { Refresh(); });
 				return;
 			}

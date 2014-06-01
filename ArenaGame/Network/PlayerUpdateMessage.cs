@@ -13,9 +13,7 @@ namespace Arena.Game.Network
 		PlayerClass Class;
 		string Name;
 		bool Host = false;
-		int Health;
 		int MaxHealth;
-
 
 		public PlayerUpdateMessage(Player p)
 		{
@@ -26,7 +24,6 @@ namespace Arena.Game.Network
 			this.Name = p.Name;
 			this.Host = (p == BattleArena.Instance.Host);
 
-			this.Health = p.Health;
 			this.MaxHealth = p.MaxHealth;
 		}
 
@@ -37,17 +34,9 @@ namespace Arena.Game.Network
 			bool Found = false;
 			foreach (Player player in BattleArena.Instance.Players){
 				if (player.PlayerID == PlayerID) {
-					player.Ready = this.Ready;
-					player.Class = this.Class;
-					player.Name = this.Name;
 
-					player.Health = this.Health;
-					player.MaxHealth = this.MaxHealth;
+					UpdatePlayerInfo(player);
 					
-					if (Host) {
-						BattleArena.Instance.Host = player;
-					}
-
 					Found = true;
 					break;
 				}
@@ -56,22 +45,27 @@ namespace Arena.Game.Network
 			if (!Found) {
 				Player player = new Player();
 				player.PlayerID = this.PlayerID;
-				player.Ready = this.Ready;
-				player.Class = this.Class;
-				player.Name = this.Name;
 
-				player.Health = this.Health;
-				player.MaxHealth = this.MaxHealth;
-
-				if (Host) {
-					BattleArena.Instance.Host = player;
-				}
+				UpdatePlayerInfo(player);
 
 				BattleArena.Instance.Players.Add(player);
 			}
 
 			BattleArena.Instance.UpdateRequired = true;
 			this.Forward();
+		}
+
+		private void UpdatePlayerInfo(Player player)
+		{
+			player.Ready = this.Ready;
+			player.Class = this.Class;
+			player.Name = this.Name;
+
+			player.MaxHealth = this.MaxHealth;
+
+			if (Host) {
+				BattleArena.Instance.Host = player;
+			}
 		}
 	}
 }

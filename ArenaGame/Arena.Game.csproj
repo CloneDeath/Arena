@@ -47,6 +47,9 @@
     <Compile Include="Dragon.cs" />
     <Compile Include="BattleArena.cs" />
     <Compile Include="Network\EnemyUpdateMessage.cs" />
+    <Compile Include="Network\PlayerUpdateMessages\PlayerActionPointsMessage.cs" />
+    <Compile Include="Network\PlayerUpdateMessages\PlayerHealthMessage.cs" />
+    <Compile Include="Network\ShowMessage.cs" />
     <Compile Include="Network\UpdateGameStateMessage.cs" />
     <Compile Include="Network\PlayerJoining\PlayerSlotAssignmentMessage.cs" />
     <Compile Include="Network\PlayerJoining\RequestPlayerSlotMessage.cs" />
