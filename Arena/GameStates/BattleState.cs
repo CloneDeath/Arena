@@ -54,10 +54,10 @@ namespace Arena.GameStates
 
 			List<object> playerlist = new List<object>();
 			foreach (Player p in Arena.Players) {
-				if (p == Arena.Self) continue;
+				//if (p == Arena.Self) continue;
 
 				var temp_obj = new {
-					Display = p.Name + " (" + p.Class + ") - HP:" + p.Health + "/" + p.MaxHealth,
+					Display = (p == Arena.Self ? "[Me] " : "" ) + p.Name + " (" + p.Class + ") - HP:" + p.Health + "/" + p.MaxHealth,
 					Value = p,
 				};
 				playerlist.Add(temp_obj);

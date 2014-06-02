@@ -42,11 +42,6 @@ namespace Arena
 
 		void Arena_OnShowMessage(string msg)
 		{
-			if (this.InvokeRequired) {
-				this.Invoke((MethodInvoker)delegate() {
-					this.Arena_OnShowMessage(msg);
-				});
-			}
 			MessageBox.Show(msg);
 		}
 
@@ -56,6 +51,7 @@ namespace Arena
 			if (cs.ShowDialog() == DialogResult.OK) {
 				Arena = new BattleArena();
 				Arena.OnUpdate += Refresh;
+				Arena.OnShowMessage += new Action<string>(Arena_OnShowMessage);
 
 				Arena.Self.Name = "Wanderer";
 				Arena.Self.Ready = false;
